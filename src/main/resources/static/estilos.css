@@ -1,0 +1,92 @@
+
+body{
+	background-color: #8A49E4;
+}
+
+.container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  gap: 27px;
+  /*border: solid;
+  border-color: red;*/
+}
+
+.item1, .item2 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  border: solid;
+  border-color: black;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+/*.area1, .area2, .area3, .area4{ 
+	border: solid;
+	border-color: green;
+}*/
+
+.area1, .area3 {
+	height: 12rem;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.area2, .area4 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+fieldset {
+    border: 3px solid black;
+}
+
+legend {
+    float: none;
+    width: auto;
+    padding: 0 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+#tb-categoria, #tb-producto{
+	border: 3px solid black;
+}
+
+input{
+	border: 3px solid black;
+	margin-left: 1rem;
+	border-radius: 5px;
+}
+
+button{
+	border: 3px solid black;
+	border-radius: 5px;
+}
+
+select{
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+label{
+	margin-left: 5px;
+}
+
+td{
+	padding: 5px;
+}
+
+
+
+

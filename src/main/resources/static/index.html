@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registros</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+		<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" href="estilos.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	</head>
+	<body>
+		<div id="mensaje-alerta" class="alert d-none" role="alert">
+		    <span id="mensaje-texto"></span>
+		</div>
+		<div class="container text-center">
+			<div class="item1">
+				<div class="area1">
+					<fieldset id="fls01">
+	                <legend>Categoría</legend>
+	                    <form id="formCategoria">
+	                        <div id="conj_tablas">
+	                            <div class="tablas_pred">
+	                                <table id="tb_preg_resp" style="margin-top: 0px;">
+	                                    <tr style="height: 25px;">
+	                                        <td><label>Nombre:</label></td>
+	                                        <td><input type="text" name="categoria" id="descripcion" required></td>
+	                                    </tr>
+	                                </table>
+	                            </div>
+	                        </div>
+		                    <button type="submit" style="margin-bottom: 5px;">Registrar</button>
+		                    <button type="reset" style="margin-left: 30%; margin-bottom: 5px">Limpiar</button>
+	                    </form>
+	            	</fieldset>
+				</div>
+				<div class="area2 tb-container">
+					<table class="table table-striped" id="tb-categoria">
+						<thead>
+						    <tr>
+						      <th scope="col">ID</th>
+						      <th scope="col">Nombre</th>
+						      <th colspan="2" style="text-align: center; vertical-align: middle;">Acciones</th>
+						    </tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="item2">
+				<div class="area3">
+					<fieldset id="fls01">
+	                <legend>Producto</legend>
+	                    <form id="formProducto">
+	                        <div id="conj_tablas">
+	                            <div class="tablas_pred">
+	                                <table id="tb_preg_resp" style="margin-top: 0px;">
+	                                    <tr style="height: 25px;">
+	                                        <td><label>Nombre:</label></td>
+	                                        <td><input type="text" name="producto" id="producto" required></td>
+	                                    </tr>
+	                                    <tr style="height: 25px;">
+	                                        <td><label>Precio:</label></td>
+	                                        <td><input type="number" step="0.01" name="precio" placeholder="S/" 
+	                                        	id="precio" required></td>
+	                                    </tr>
+	                                    <tr style="height: 25px;">
+	                                        <td>
+		                                        <div class="col-md-6">
+	                        						<label class="form-label">Categoria</label>
+	                    						</div>
+                    						</td>
+	                                        <td>
+							                    <div class="col-md-6">
+							                        <select name="opt_cat" 
+							                                id="select_cat" required>
+							                            <option value="" disabled selected>Elegir...</option>
+							                        </select>
+						                    	</div>
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </div>
+	                        </div>
+                            <button type="submit" style="margin-bottom: 5px;">Registrar</button>
+                            <button type="reset" style="margin-left: 30%; margin-bottom: 5px">Limpiar</button>
+	                    </form>
+	            	</fieldset>
+				</div>
+				<div class="area4 tb-container">
+					<table class="table table-striped" id="tb-producto">
+						<thead>
+						    <tr>
+						      <th scope="col">ID</th>
+						      <th scope="col">Nombre</th>						      
+						      <th scope="col">Precio</th>
+						      <th scope="col">Categoria</th>
+						      <th colspan="2" style="text-align: center; vertical-align: middle;">Acciones</th>
+						    </tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modalEditarCategoria" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-warning">
+						<h5 class="modal-title">Editar Datos</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form id="formEditar">
+							<input type="hidden" name="id">
+							<div class="mb-3">
+								<label>Nombre</label>
+									<input type="text" id="editNombre" class="form-control" name="nombre" required>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+						<button class="btn btn-success" id="actualizar">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modalEditarProducto" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-warning">
+						<h5 class="modal-title">Editar Datos</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form id="formEditar">
+							<input type="hidden" name="editProdId">
+							<div class="mb-3">
+								<label>Nombre</label>
+									<input type="text" id="editNombre" class="form-control" name="editNombre" required> 
+							</div>
+							<div class="mb-3">
+								<label>Precio</label>
+									<input type="number" step="0.01" id="editPrecio" class="form-control" name="edtiPrecio" required>
+							</div>
+							<div class="mb-3">
+								<label>Categoria</label>
+		                        <select name="editCat" 
+		                                id="select_cat_edit" required>
+		                            <option value="" disabled selected>Elegir...</option>
+		                        </select>
+                    		</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+						<button class="btn btn-success" id="actualizarProducto">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modalConfirmar" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Confirmar acción</h5>
+		      </div>
+		      <div class="modal-body">
+		        <p id="modalConfirmarMensaje"></p>
+		      </div>
+		      <div class="modal-footer">
+		        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+		        <button class="btn btn-danger" id="btnConfirmarAceptar">Eliminar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<script type="text/javascript" src="script.js"></script>
+	</body>
+</html>
