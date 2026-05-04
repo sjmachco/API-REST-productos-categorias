@@ -3,7 +3,9 @@ package com.example.JPARelaciones.EjJPARelaciones.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,7 +28,7 @@ public class Categoria {
 	private String descripcion;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Producto> producto = new ArrayList<>();
 
 	public Long getId() {

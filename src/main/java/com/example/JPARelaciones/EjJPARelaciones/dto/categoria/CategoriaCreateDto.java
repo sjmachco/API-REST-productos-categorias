@@ -1,21 +1,14 @@
 package com.example.JPARelaciones.EjJPARelaciones.dto.categoria;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CategoriaCreateDto {
 	
-	private Long id;
+	@NotBlank(message = "Debe ingresar una categoría.")
 	private String descripcion;
 	
-	public CategoriaCreateDto(Long id, String descripcion) {
-		this.id = id;
+	public CategoriaCreateDto(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getDescripcion() {

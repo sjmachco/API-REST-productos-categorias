@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.JPARelaciones.EjJPARelaciones.dto.producto.ProductoCreateDto;
 import com.example.JPARelaciones.EjJPARelaciones.dto.producto.ProductoResponseDto;
 import com.example.JPARelaciones.EjJPARelaciones.dto.producto.ProductoUpdateDto;
+import com.example.JPARelaciones.EjJPARelaciones.exception.ResourceNotFoundException;
 import com.example.JPARelaciones.EjJPARelaciones.mapper.ProductoMapper;
 import com.example.JPARelaciones.EjJPARelaciones.model.Categoria;
 import com.example.JPARelaciones.EjJPARelaciones.model.Producto;
@@ -34,13 +35,13 @@ public class ProductoService {
 	
 	public ProductoResponseDto getProductoById(Long id) {
 		Producto producto = productoRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+				.orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado"));
 		return productoMapper.toDto(producto);
 	}
 	
 	public ProductoResponseDto createProducto(ProductoCreateDto dto) {
 		Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-				.orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+				.orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada"));
 		Producto producto = productoMapper.toEntity(dto);
 		producto.setCategoria(categoria);
 		Producto guardado = productoRepository.save(producto);
@@ -49,9 +50,9 @@ public class ProductoService {
 	
 	public ProductoResponseDto updateProducto(Long id, ProductoUpdateDto dto) {
 		Producto productoExistente = productoRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Producto no encontrado."));
+				.orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado."));
 		Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-				.orElseThrow(() -> new RuntimeException("Categoria no encontrada."));
+				.orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada."));
 		productoMapper.updateDto(dto, productoExistente);
 		productoExistente.setCategoria(categoria);
 		Producto actualizado = productoRepository.save(productoExistente);

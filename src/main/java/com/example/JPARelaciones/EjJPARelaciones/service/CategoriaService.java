@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.JPARelaciones.EjJPARelaciones.dto.categoria.CategoriaCreateDto;
 import com.example.JPARelaciones.EjJPARelaciones.dto.categoria.CategoriaResponseDto;
 import com.example.JPARelaciones.EjJPARelaciones.dto.categoria.CategoriaUpdateDto;
+import com.example.JPARelaciones.EjJPARelaciones.exception.ResourceNotFoundException;
 import com.example.JPARelaciones.EjJPARelaciones.mapper.CategoriaMapper;
 import com.example.JPARelaciones.EjJPARelaciones.model.Categoria;
 import com.example.JPARelaciones.EjJPARelaciones.repository.CategoriaRepository;
@@ -42,13 +43,13 @@ public class CategoriaService {
 	
 	public CategoriaResponseDto getCategoriaId(Long id) {
 		Categoria categoria = categoriaRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Categoria no encontrada."));
+				.orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada."));
 		return categoriaMapper.toDto(categoria);
 	}
 	
 	public CategoriaResponseDto updateCategoria(Long id, CategoriaUpdateDto dto) {
 		Categoria categoriaExistente = categoriaRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Categoria no encontrada."));
+				.orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada."));
 		categoriaMapper.updateEntity(dto, categoriaExistente);
 		Categoria categoria = categoriaRepository.save(categoriaExistente);
 		return categoriaMapper.toDto(categoria);

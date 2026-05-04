@@ -2,10 +2,13 @@ package com.example.JPARelaciones.EjJPARelaciones.model;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,9 +30,9 @@ public class Producto {
 	@Column(name = "precio", precision = 6, scale = 2, nullable = false)
 	private BigDecimal precio;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoria_id")
-	@JsonBackReference
+	@JsonIgnore
 	private Categoria categoria;
 
 	public Long getId() {
