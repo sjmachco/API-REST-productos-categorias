@@ -174,7 +174,7 @@ function listarProductos(){
 			tbProducto.innerHTML = '';
 			
 			if(data.data.length === 0){
-				tbCategoria.innerHTML = `
+				tbProducto.innerHTML = `
 					<tr>
 					    <td colspan="7" style="text-align:center;">
 					        No hay datos
