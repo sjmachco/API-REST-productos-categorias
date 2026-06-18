@@ -30,7 +30,6 @@ function listarCategorias(){
 				tbCategoria.appendChild(tr);
 			})
 			editarCategoria();
-			eliminarCategoria();
 		})
 }
 
