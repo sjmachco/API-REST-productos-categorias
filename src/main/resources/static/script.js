@@ -15,8 +15,7 @@ function listarCategorias(){
 					</tr>
 				`;
 				return;
-			};
-			//console.log(typeof data, data);
+			};;
 			data.data.forEach(categoria =>{
 				const tr = document.createElement('tr');
 				tr.innerHTML = `
@@ -113,11 +112,6 @@ function actualizarCategoria(datos){
 }
 
 function eliminarCategoria(categoriaId, fila){
-	//document.querySelectorAll('.eliminar').forEach(button =>{
-		//button.addEventListener('click', function(){
-			//const fila = this.parentElement.parentElement;
-			//const categoriaId = this.getAttribute('data-id');
-			//if (confirm('¿Seguro que desea eliminar esta categoria?')) {
 				fetch(`/categoria/eliminar/${categoriaId}`, {
 					method: 'DELETE'
 				})
@@ -130,9 +124,6 @@ function eliminarCategoria(categoriaId, fila){
 						});
 					}
 				})
-			//}
-		//})
-	//})
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -207,12 +198,7 @@ formProducto.addEventListener('submit', function(event){
 	
 	const nombre = document.getElementById('producto').value;
 	const precio = document.getElementById('precio').value;
-	const categoriaId = document.getElementById('select_cat').value;
-	
-	/*if (!categoriaId) {
-	  mostrarMensaje('Debes seleccionar una categoría', false);
-	  return;
-	}*/
+	const categoriaId = document.getElementById('select_cat').value;	
 	
 	const producto = {
 		nombre : nombre,
@@ -237,31 +223,29 @@ formProducto.addEventListener('submit', function(event){
 	})
 })
 
+var selectCatId = 0;
+
 function editarProducto(){
-	var selectCatId = 0;
 	document.querySelectorAll('.editar').forEach(button =>{
 		button.addEventListener('click', function(){
 			document.querySelector('input[name="editProdId"]').value = this.getAttribute('data-id');
 			document.querySelector('input[name="editNombre"]').value = this.getAttribute('data-nombre');
-			document.querySelector('input[name="edtiPrecio"]').value = this.getAttribute('data-precio');
+			document.querySelector('input[name="editPrecio"]').value = this.getAttribute('data-precio');
 			selectCatId = this.getAttribute('data-categoriaId');
-			cargarCategorias('select_cat_edit', selectCatId);
-			/*console.log(this.getAttribute('data-id') + " " + this.getAttribute('data-nombre') + " " + 
-			this.getAttribute('data-precio') + " " + this.getAttribute('data-categoriaId'));*/		
+			cargarCategorias('select_cat_edit', selectCatId);		
 		})
 	})
-
-	document.getElementById('actualizarProducto').addEventListener('click', () =>{
-		productoBody = {
-			id: document.querySelector('input[name="editProdId"]').value,
-			nombre: document.querySelector('input[name="editNombre"]').value,
-			precio: document.querySelector('input[name="edtiPrecio"]').value,
-			categoriaId: selectCatId,
-		}
-		console.log(productoBody.id + " " + productoBody.nombre + " " + productoBody.precio + " " + productoBody.categoriaId)
-		actualizarProducto(productoBody);
-	})
 }
+
+document.getElementById('actualizarProducto').addEventListener('click', () =>{
+	productoBody = {
+		id: document.querySelector('input[name="editProdId"]').value,
+		nombre: document.querySelector('input[name="editNombre"]').value,
+		precio: document.querySelector('input[name="editPrecio"]').value,
+		categoriaId: selectCatId,
+	}
+	actualizarProducto(productoBody);
+});
 
 function actualizarProducto(datos){
 	const modal = document.getElementById('modalEditarProducto');
@@ -284,7 +268,7 @@ function actualizarProducto(datos){
 }
 
 function eliminarProducto(productoId, fila){
-		fetch(`/categoria/eliminar/${productoId}`, {
+		fetch(`/producto/eliminar/${productoId}`, {
 			method: 'DELETE'
 		})
 		.then(response => response.json())
@@ -349,5 +333,3 @@ function confirmar(mensaje, onAceptar) {
 }
 
 cargarCategorias();
-//listarProductos();
-//listarCategorias();
